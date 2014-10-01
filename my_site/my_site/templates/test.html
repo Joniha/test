@@ -1,0 +1,46 @@
+{% load url from future %}
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="/static/my/css/jquery-ui.css">
+<script src="/static/my/js/jquery.min.js"></script>
+<script src="/static/my/js/jquery-ui.js"></script>
+<script src="/static/my/js/jquery.validate.min.js"></script>
+<script src="/static/my/logic.js"></script>
+<html>
+<header align="center">Тест приложение</header>
+<body>
+<h2 align="center">ДИНАМИЧЕСКИЕ МОДЕЛИ DJANGO</h2>
+<form id ="my_form" action="" method="get">
+<table  align="center" width="1000">
+<tr>
+<td align="left" id="model_list">
+{% for key, value in  list.items %}
+<li><a class="link" href="#" data="{{ key }}">{{value}}</a></li>
+{% endfor %}
+</td>
+<td><form id="tables_form"><table  border="5" width="900" id='table_obj'></table><br></form></td>
+</tr>
+<tr>
+<td></td><td id="add"></td>
+<tr>
+<td></td><td id ="but"></td>
+</tr>
+</table>
+</form>
+</body>
+</html>
+
+<script language="JavaScript" charset="UTF-8">
+$(".link").click(function(event){
+    var temp = $(this).attr('data');
+    $.ajax({
+            type: "GET",
+            url: '{% url 'my' %}',
+            data: {'my': temp},
+            dataType: "json",
+            success:function(json){
+                logic(json, '{% url 'update' %}', '{% url 'insert' %}');
+                }
+            });
+
+    });
+</script>

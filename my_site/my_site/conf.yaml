@@ -1,0 +1,14 @@
+model1:
+  title: Работники
+  filds:
+    - {fild: name,title: Имя,type: char}
+    - {fild: many,title: Зарплата,type: int }
+    - {fild: date,title: Дата,type: data}
+model2:
+  title: Комнаты
+  filds:
+    - {fild: name,title: Название,type: char}
+    - {fild: name1,title: Пощадь,type: int}
+
+
+
