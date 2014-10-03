@@ -38,7 +38,7 @@ $(".link").click(function(event){
             data: {'my': temp},
             dataType: "json",
             success:function(json){
-                logic(json, '{% url 'update' %}', '{% url 'insert' %}');
+             logic(temp, json, '{% url 'update' %}', '{% url 'insert' %}');
                 }
             });
 
