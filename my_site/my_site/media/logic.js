@@ -1,4 +1,4 @@
-function logic(tables, update, test){
+function logic(model, tables, update, test){
 
     $("label").remove();
         $("input:button").remove();
@@ -49,7 +49,7 @@ function logic(tables, update, test){
                             });
                     });
         $('#send1').live('click', function(eventObject){
-                var res = "_" + _st + "_" + _id +"_" +$('#update').val();
+                var res = "_" + model + "_" + _st + "_" + _id +"_" +$('#update').val();
                         if (res != ' '){
                                         ajax(res, update);
                                         }
@@ -75,9 +75,9 @@ function logic(tables, update, test){
 
         $("<input type='button' id='send0' value='Ok'/>").appendTo("#but");
         $('#send0').bind('click', function(eventObject){
-            var input= ''; //= $("input").serialize();
+            var input= model;
             $("input").each(function(i){
-                        if ($(this).val() !="Ok"){input +="_" + $(this).val();}
+                        if ($(this).val() !="Ok"){input +=  "_" + $(this).val();}
                         });
                         if (input){
                                ajax(input, test);
@@ -87,16 +87,16 @@ function logic(tables, update, test){
 }
 function ajax(param, _url){
             $.ajax({
-            type: "GET",
-            url: _url,
-            data: {'my':param},
-            dataType: "json",
-            success:function(){
+               type: "GET",
+               url: _url,
+               data: {'my':param},
+               dataType: "json",
+               success:function(){
                     location.reload();
                     },
-            error:function(){
-              // alert("Error");
+               error:function(){
+                    //alert("Error");
                     }
-            });
+               });
 
-}
+            }
