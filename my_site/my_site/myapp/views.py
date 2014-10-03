@@ -15,8 +15,8 @@ def manager():
     management.call_command('migrate', interactive=False)
     #management.call_command('makemigrations', interactive=False)
 
-def run(request, model_name=None):
-    #manager()
+def run(request):
+    manager()
     lists = get_list()
     return render_to_response('test.html', {'list':lists})
 
