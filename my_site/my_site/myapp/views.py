@@ -10,9 +10,9 @@ import re, logging
 
 Model = 0
 
-#def manager():
+def manager():
     #management.call_command('syncdb', interactive=False)
-    #management.call_command('migrate', interactive=False)
+    management.call_command('migrate', interactive=False)
     #management.call_command('makemigrations', interactive=False)
 
 def run(request, model_name=None):
