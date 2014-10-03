@@ -8,7 +8,6 @@ from django.shortcuts import render_to_response
 import re, logging
 
 
-Model = 0
 
 def manager():
     #management.call_command('syncdb', interactive=False)
@@ -21,22 +20,18 @@ def run(request):
     return render_to_response('test.html', {'list':lists})
 
 def insert(request):
-    global Model
-    model = Model
-    fild = [key.name for key in model._meta.fields]
     results = {'success': False}
     if 'my' in request.GET:
         get = request.GET['my']
-        ####################
-        print ('Model=', model, 'Value=', get)
-        ####################
-        #get = get.replace('&', '')
         get = re.findall('.[^_]+', get)
         values = []
         for i in get:
             values.append(i.replace('_', ''))
-        j = 0
+        j = 1
+        print values
         itog = {}
+        model = get_model('myapp', values[0])
+        fild = [key.name for key in model._meta.fields]
         for i in fild:
             if i != 'id':
                 itog[i] = values[j]
@@ -48,25 +43,22 @@ def insert(request):
     return HttpResponse(json, mimetype='application/json')
 
 def update(request):
-    global Model
-    model = Model
-    fild = [key.name for key in model._meta.fields]
     results = {'success': False}
     if 'my' in request.GET:
         results = {'success': True}
         get = request.GET['my']
-        ####################
-        print ('Model=', model, 'Value=', get)
-        ####################
         get = re.findall('.[^_]+', get)
         values = []
         for i in get:
             values.append(i.replace('_', ''))
-        value = int(values[1])
+        name = values[0]
+        model = get_model('myapp', name)
+        fild = [key.name for key in model._meta.fields]
+        value = int(values[2])
         key = fild[value]
         itog = {}
-        itog[key] = values[2]
-        model.objects.filter(id=values[0]).update(**itog)
+        itog[key] = values[3]
+        model.objects.filter(id=values[1]).update(**itog)
     json2 = simplejson.dumps(results)
     return HttpResponse(json2, mimetype='application/json')
 
@@ -86,10 +78,9 @@ def get_type(fil, fild):
     return result
 
 def get(request):
-    global Model
+   
     if ('my' in request.GET):
         model = get_model('myapp', request.GET['my'])
-        Model = model
         fild = [key.name for key in model._meta.fields]
         query = model.objects.all().values_list(*fild)
         title_field = get_tit_fields()
