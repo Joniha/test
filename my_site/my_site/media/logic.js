@@ -75,7 +75,7 @@ function logic(model, tables, update, test){
 
         $("<input type='button' id='send0' value='Ok'/>").appendTo("#but");
         $('#send0').bind('click', function(eventObject){
-            var input= model;
+            var input = model;
             $("input").each(function(i){
                         if ($(this).val() !="Ok"){input +=  "_" + $(this).val();}
                         });
