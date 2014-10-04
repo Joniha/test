@@ -7,8 +7,6 @@ from django.utils import simplejson
 from django.shortcuts import render_to_response
 import re, logging
 
-
-
 def manager():
     #management.call_command('syncdb', interactive=False)
     management.call_command('migrate', interactive=False)
@@ -28,7 +26,6 @@ def insert(request):
         for i in get:
             values.append(i.replace('_', ''))
         j = 1
-        print values
         itog = {}
         model = get_model('myapp', values[0])
         fild = [key.name for key in model._meta.fields]
