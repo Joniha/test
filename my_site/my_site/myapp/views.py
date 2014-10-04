@@ -75,8 +75,7 @@ def get_type(fil, fild):
     return result
 
 def get(request):
-   
-    if ('my' in request.GET):
+   if ('my' in request.GET):
         model = get_model('myapp', request.GET['my'])
         fild = [key.name for key in model._meta.fields]
         query = model.objects.all().values_list(*fild)
