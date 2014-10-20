@@ -5,11 +5,11 @@ from django.http import HttpResponse
 from my_site.myapp.models import get_list, get_tit_fields
 from django.utils import simplejson
 from django.shortcuts import render_to_response
-import re, logging
+import re
 
 def manager():
     #management.call_command('syncdb', interactive=False)
-    management.call_command('migrate', interactive=False)
+    #management.call_command('migrate', interactive=False)
     #management.call_command('makemigrations', interactive=False)
 
 def run(request):
